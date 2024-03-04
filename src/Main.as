@@ -66,6 +66,12 @@ void Unload() {
     }
     callPtr.RemoveRange(0, callPtr.Length);
     origBytes.RemoveRange(0, origBytes.Length);
+
+    UI::ShowNotification(
+        Meta::ExecutingPlugin().Name,
+        "Unapplying Patch for InputPortDx8::HotPlugUpdate::EnumDevices calls.",
+        vec4(.2, .1, .5, .5), 10000
+    );
 }
 
 void OnDestroyed() { Unload(); }
