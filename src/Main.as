@@ -35,6 +35,15 @@ uint64[] callPtr;
 void Main() {
     // 74(je) to EB(jmp)
     callPtr.InsertLast(Dev::FindPattern(EnumDevices_Pattern));
+    if (callPtr[0] == 0) {
+        UI::ShowNotification(
+            Meta::ExecutingPlugin().Name,
+            "Failed to find pattern for EnumDevices.",
+            vec4(.8, .1, .1, .5), 10000
+        );
+        callPtr.RemoveLast();
+        return;
+    }
     origBytes.InsertLast(Dev::Patch(callPtr[0], "EB"));
 
     UI::ShowNotification(
