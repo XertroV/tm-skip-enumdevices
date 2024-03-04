@@ -39,9 +39,15 @@ void Main() {
 
     UI::ShowNotification(
         Meta::ExecutingPlugin().Name,
-        "NOOPed InputPortDx8::HotPlugUpdate::EnumDevices calls.",
-        vec4(1, 0, 0, 1), 10000
-        );
+        "Patch: Skipping InputPortDx8::HotPlugUpdate::EnumDevices calls.",
+        vec4(.2, .5, .1, .5), 10000
+    );
+}
+
+/** Called when the plugin is enabled from the settings, the menu or programatically via the [`Meta` API](https://openplanet.dev/docs/api/Meta).
+*/
+void OnEnabled() {
+    Main();
 }
 
 void Unload() {
@@ -49,6 +55,8 @@ void Unload() {
         if (callPtr[i] == 0) continue;
         Dev::Patch(callPtr[i], origBytes[i]);
     }
+    callPtr.RemoveRange(0, callPtr.Length);
+    origBytes.RemoveRange(0, origBytes.Length);
 }
 
 void OnDestroyed() { Unload(); }

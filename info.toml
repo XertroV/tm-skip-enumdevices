@@ -1,5 +1,5 @@
 [meta]
-name     = "nop-dx8-hotplugupdate"
+name     = "Skip EnumDevices Patch"
 author   = "XertroV"
 category = "Fixes"
 version  = "0.1.0"
